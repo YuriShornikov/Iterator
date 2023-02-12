@@ -4,23 +4,22 @@ class FlatIterator:
 
     def __init__(self, list_of_list):
         self.list_of_list = list_of_list
-        pass
 
     def __iter__(self):
-        self.flat_iterator_item = []
+        self.flat_iterator_item = iter([])
         return self
 
     def __next__(self):
-        if self.list_of_list != 0:
-            self.flat_iterator_item = self.list_of_list.pop()
-        return self.flat_iterator_item
-
-# test = []
-# a = [1, 2, 3]
-# while a != []:
-#     test.append(a.pop())
-# print(list(reversed(test)))
-
+        if self.list_of_list is None:
+            raise StopIteration
+        try:
+            self.list1 = next(self.flat_iterator_item)
+        except StopIteration:
+            self.list_of_list_pop = self.list_of_list.pop()
+            self.flat_iterator_item = iter(self.list_of_list_pop)
+            self.list1 = next(self.flat_iterator_item)
+        # self.list1 = reversed(self.item_test)
+        return self.list1
 
 list_of_lists_1 = [
         ['a', 'b', 'c'],
@@ -28,8 +27,11 @@ list_of_lists_1 = [
         [1, 2, None]
     ]
 
-test = FlatIterator(list_of_lists_1)
-print(list(test))
+
+for i in FlatIterator(list_of_lists_1):
+    print(i)
+
+
 
 # iter1 = iter(list_of_lists_1)
 # for i in iter1:
@@ -65,3 +67,15 @@ print(list(test))
 # #
 # if __name__ == '__main__':
 #     test_1()
+
+
+# test = []
+# a = [1, 2, 3]
+# # while a != []:
+# #     test.append(a.pop())
+# # print(list(reversed(test)))
+# for i in a:
+#     print(i)
+#     if a != []:
+#         test.append(a.pop())
+# print(test)
