@@ -6,20 +6,28 @@ class FlatIterator:
         self.list_of_list = list_of_list
 
     def __iter__(self):
-        self.flat_iterator_item = iter([])
+        self.flat_iterator_item = self.list_of_list.pop()
+        self.step = 0
         return self
 
     def __next__(self):
-        if self.list_of_list is None:
+        if self.step < 3:
+            self.step = len(self.list_of_list) - 1
+            self.step += 1
+            self.flat_iterator_item
+            return self.flat_iterator_item
+        else:
             raise StopIteration
-        try:
-            self.list1 = next(self.flat_iterator_item)
-        except StopIteration:
-            self.list_of_list_pop = self.list_of_list.pop()
-            self.flat_iterator_item = iter(self.list_of_list_pop)
-            self.list1 = next(self.flat_iterator_item)
-        # self.list1 = reversed(self.item_test)
-        return self.list1
+        # if self.list_of_list == 0:
+        #     raise StopIteration
+        # try:
+        #     self.list1 = self.list_of_list
+        # except StopIteration:
+        #     self.list_of_list_pop = self.list_of_list.pop()
+        #     self.flat_iterator_item = self.list_of_list_pop
+        #     self.list1 = self.flat_iterator_item
+        # # self.list1 = reversed(self.item_test)
+        # return self.list1
 
 list_of_lists_1 = [
         ['a', 'b', 'c'],
@@ -31,18 +39,6 @@ list_of_lists_1 = [
 for i in FlatIterator(list_of_lists_1):
     print(i)
 
-
-
-# iter1 = iter(list_of_lists_1)
-# for i in iter1:
-#     iter2 = iter(i)
-#     for a in iter2:
-#         print(a)
-
-
-
-    # print(i)
-    # print(next(iter1))
 # def test_1():
 #
 #     list_of_lists_1 = [
